@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+:root {
+  /* Base colors - Paper White & Soft Black */
+  --bg: #FDFCFB;
+  --text: #1A1A1A;
+  
+  /* Primary - Deep Auburn */
+  --primary: #632A26;
+  --primary-foreground: #FDFCFB;
+  
+  /* Secondary - Classic Khaki */
+  --secondary: #B8A98F;
+  --secondary-foreground: #1A1A1A;
+  
+  /* Muted - Classic Khaki for backgrounds/large text */
+  --muted: #B8A98F;
+  --muted-foreground: #1A1A1A;
+  
+  /* Accent - Deep Auburn */
+  --accent: #632A26;
+  --accent-foreground: #FDFCFB;
+  
+  /* Border - Lighter Khaki (distinct from muted) */
+  --border: #D4C9B8;
+  
+  /* Glassmorphism */
+  --surface: rgba(253, 252, 251, 0.86);
+  --glass: rgba(253, 252, 251, 0.14);
+  --glass-strong: rgba(253, 252, 251, 0.25);
+  --glass-border: rgba(212, 201, 184, 0.32);
+  --shadow-soft: 0 18px 48px rgba(99, 42, 38, 0.16);
+  
+  /* Radius */
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+}
+
+.dark {
+  /* Base colors - Softer dark background */
+  --bg: #141414;
+  --text: #FDFCFB;
+  
+  /* Primary - Brighter Auburn for dark mode visibility */
+  --primary: #7D3530;
+  --primary-foreground: #FDFCFB;
+  
+  /* Secondary - Brighter Khaki for dark mode */
+  --secondary: #C4B59D;
+  --secondary-foreground: #141414;
+  
+  /* Muted - Brighter Khaki */
+  --muted: #C4B59D;
+  --muted-foreground: #FDFCFB;
+  
+  /* Accent - Brighter Auburn */
+  --accent: #7D3530;
+  --accent-foreground: #FDFCFB;
+  
+  /* Border - Distinct from muted in dark mode */
+  --border: #4A4A4A;
+  
+  /* Glassmorphism - darker for dark mode */
+  --surface: rgba(20, 20, 20, 0.55);
+  --glass: rgba(20, 20, 20, 0.65);
+  --glass-strong: rgba(20, 20, 20, 0.8);
+  --glass-border: rgba(196, 181, 157, 0.08);
+  --shadow-soft: 0 18px 48px rgba(0, 0, 0, 0.45);
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-surface: var(--surface);
+  --color-foreground: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-border: var(--border);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --shadow-lg: var(--shadow-soft);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(99, 42, 38, 0.06), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(184, 169, 143, 0.08), transparent 36%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(99, 42, 38, 0.15);
+}
+
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-soft);
+}
+
+.glass-strong {
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ⚠️ ACCESSIBILITY WARNING
+ * Classic Khaki (#B8A98F / --secondary) provides only 2.8:1 contrast on Paper White.
+ * This FAILS WCAG AA for body text.
+ * 
+ * Safe usage:
+ *   ✅ Headings (text-secondary in h1-h6)
+ *   ✅ Large UI text (>18px, labels, badges)
+ *   ✅ Backgrounds (bg-secondary)
+ * 
+ * Unsafe usage:
+ *   ❌ Body copy / paragraph text
+ *   ❌ Small text (<18px body content)
+ * 
+ * For body text, always use text-foreground (#1A1A1A) which provides 14.8:1 contrast.
+ */
